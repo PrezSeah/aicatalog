@@ -1,0 +1,60 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h2 id="overview">Overview</h2>
+<p>Given a body of text (context) about a subject and questions about that subject, the model will answer questions based on the given context.</p>
+<p>The model is based on the <a href="https://github.com/google-research/bert">BERT model</a>.</p>
+<h2 id="model-metadata">Model Metadata</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Application</th>
+<th>Industry</th>
+<th>Framework</th>
+<th>Training Data</th>
+<th>Input Data Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Natural Language Processing (NLP)</td>
+<td>Question and Answer</td>
+<td>General</td>
+<td>TensorFlow</td>
+<td><a href="https://rajpurkar.github.io/SQuAD-explorer/">SQuAD 1.1</a></td>
+<td>Text</td>
+</tr>
+</tbody>
+</table>
+<h2 id="options-available-for-deploying-this-model">Options available for deploying this model</h2>
+<p>This model can be deployed using the following mechanisms:</p>
+<ul>
+<li>Deploy from Dockerhub:</li>
+</ul>
+<pre><code>docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> codait/max-question-answering
+</code></pre><h2 id="example-usage">Example Usage</h2>
+<p>You can test or use this model</p>
+<ul>
+<li><a href="#test-the-model-using-curl">using cURL</a></li>
+</ul>
+<h3 id="test-the-model-using-curl">Test the model using cURL</h3>
+<p>Once deployed, you can test the model from the command line. For example if running locally:</p>
+<pre><code class="lang-shell">curl -X POST <span class="hljs-string">"http://localhost:5000/model/predict"</span> -H <span class="hljs-string">"accept: application/json"</span> -H <span class="hljs-string">"Content-Type: application/json"</span> -d <span class="hljs-string">"{<span class="hljs-subst">\"</span>paragraphs<span class="hljs-subst">\"</span>: [{ <span class="hljs-subst">\"</span>context<span class="hljs-subst">\"</span>: <span class="hljs-subst">\"</span>John lives in Brussels and works for the EU<span class="hljs-subst">\"</span>, <span class="hljs-subst">\"</span>questions<span class="hljs-subst">\"</span>: [<span class="hljs-subst">\"</span>Where does John Live?<span class="hljs-subst">\"</span>,<span class="hljs-subst">\"</span>What does John do?<span class="hljs-subst">\"</span>,<span class="hljs-subst">\"</span>What is his name?<span class="hljs-subst">\"</span> ]},{ <span class="hljs-subst">\"</span>context<span class="hljs-subst">\"</span>: <span class="hljs-subst">\"</span>Jane lives in Paris and works for the UN<span class="hljs-subst">\"</span>, <span class="hljs-subst">\"</span>questions<span class="hljs-subst">\"</span>: [<span class="hljs-subst">\"</span>Where does Jane Live?<span class="hljs-subst">\"</span>,<span class="hljs-subst">\"</span>What does Jane do?<span class="hljs-subst">\"</span> ]}]}"</span>
+</code></pre>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ok"</span>,
+  <span class="hljs-attr">"predictions"</span>: [
+    [
+      <span class="hljs-string">"Brussels"</span>,
+      <span class="hljs-string">"works for the EU"</span>,
+      <span class="hljs-string">"John"</span>
+    ],
+    [
+      <span class="hljs-string">"Paris"</span>,
+      <span class="hljs-string">"works for the UN"</span>
+    ]
+  ]
+}
+</code></pre>
+</body></html>

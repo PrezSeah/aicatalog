@@ -1,0 +1,85 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h2 id="overview">Overview</h2>
+<p>This model detects humans and their poses in a given image. The model first detects the humans in the input image and then identifies the body parts, including nose, neck, eyes, shoulders, elbows, wrists, hips, knees, and ankles. Next, each pair of associated body parts is connected by a pose line. The pose lines are assembled into full body poses for each of the humans detected in the image.</p>
+<h2 id="model-metadata">Model Metadata</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Application</th>
+<th>Industry</th>
+<th>Framework</th>
+<th>Training Data</th>
+<th>Input Data Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vision</td>
+<td>Human Pose Estimation</td>
+<td>Multi</td>
+<td>Tensorflow</td>
+<td><a href="http://cocodataset.org">COCO</a></td>
+<td>Image File</td>
+</tr>
+</tbody>
+</table>
+<h2 id="options-available-for-deploying-this-model">Options available for deploying this model</h2>
+<p>This model can be deployed using the following mechanisms:</p>
+<ul>
+<li><p>Deploy from Dockerhub:</p>
+<pre><code>docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> codait/max-human-pose-estimator
+</code></pre></li>
+</ul>
+<ul>
+<li>Locally:</li>
+</ul>
+<h2 id="example-usage">Example Usage</h2>
+<p>You can test or use this model</p>
+<ul>
+<li><a href="#test-the-model-using-curl">using cURL</a></li>
+</ul>
+<h3 id="test-the-model-using-curl">Test the model using cURL</h3>
+<p>Once deployed, you can test the model from the command line. For example if running locally:</p>
+<pre><code>curl -F <span class="hljs-string">"image=@samples/p3.jpg"</span> -XPOST http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">5000</span><span class="hljs-regexp">/model/</span>predict
+</code></pre><p>You should see a JSON response like that below:</p>
+<pre><code>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ok"</span>,
+  <span class="hljs-attr">"predictions"</span>: [
+    {
+      <span class="hljs-attr">"human_id"</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">"pose_lines"</span>: [
+        {
+          <span class="hljs-attr">"line"</span>: [
+            <span class="hljs-number">110</span>,
+            <span class="hljs-number">53</span>,
+            <span class="hljs-number">91</span>,
+            <span class="hljs-number">53</span>
+          ]
+        },
+        {
+          <span class="hljs-attr">"line"</span>: [
+            <span class="hljs-number">110</span>,
+            <span class="hljs-number">53</span>,
+            <span class="hljs-number">129</span>,
+            <span class="hljs-number">50</span>
+          ]
+        },
+        .
+        .
+        .
+        {
+          <span class="hljs-attr">"line"</span>: [
+            <span class="hljs-number">114</span>,
+            <span class="hljs-number">35</span>,
+            <span class="hljs-number">119</span>,
+            <span class="hljs-number">32</span>
+          ]
+        }
+      ]
+    }
+  ]
+}
+</code></pre></body></html>

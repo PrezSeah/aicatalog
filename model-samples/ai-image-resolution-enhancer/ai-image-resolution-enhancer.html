@@ -1,0 +1,113 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h2 id="overview">Overview</h2>
+<p>This model is able to upscale a pixelated image by a factor of 4, while generating photo-realistic details. The backbone of this neural network is a <em>Generative Adversarial Network</em> (GAN) trained on 600,000 images of the <a href="https://storage.googleapis.com/openimages/web/index.html">OpenImages V4</a> dataset.</p>
+<p>The GAN is based on <a href="https://github.com/brade31919/SRGAN-tensorflow">SRGAN-tensorflow GitHub repository</a></p>
+<h2 id="model-metadata">Model Metadata</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Application</th>
+<th>Industry</th>
+<th>Framework</th>
+<th>Training Data</th>
+<th>Input Data Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vision</td>
+<td>Super-Resolution</td>
+<td>General</td>
+<td>TensorFlow</td>
+<td><a href="https://storage.googleapis.com/openimages/web/index.html">OpenImages V4</a></td>
+<td>Image (RGB/HWC)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="benchmark">Benchmark</h2>
+<table>
+<thead>
+<tr>
+<th>Set5</th>
+<th>Author&#39;s SRGAN</th>
+<th>This SRGAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PSNR</td>
+<td>29.40</td>
+<td>29.56</td>
+</tr>
+<tr>
+<td>SSIM</td>
+<td>0.85</td>
+<td>0.85</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Set14</th>
+<th>Author&#39;s SRGAN</th>
+<th>This SRGAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PSNR</td>
+<td>26.02</td>
+<td>26.25</td>
+</tr>
+<tr>
+<td>SSIM</td>
+<td>0.74</td>
+<td>0.72</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>BSD100</th>
+<th>Author&#39;s SRGAN</th>
+<th>This SRGAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PSNR</td>
+<td>25.16</td>
+<td>24.4</td>
+</tr>
+<tr>
+<td>SSIM</td>
+<td>0.67</td>
+<td>0.67</td>
+</tr>
+</tbody>
+</table>
+<p>The performance of this implementation was evaluated on three datasets: Set5, Set14, and BSD100.
+The PSNR (peak signal to noise ratio) and SSIM (structural similarity index) metrics were evaluated, although the paper discusses
+the MOS (mean opinion score) as the most favorable metric. In essence, the SRGAN implementation trades a better PSNR or SSIM score for a result more appealing to the human eye. This leads to a collection of output images with more crisp and realistic details.</p>
+<p><em>NOTE: The SRGAN in the paper was trained on 350k ImageNet samples, whereas this SRGAN was trained on 600k <a href="https://storage.googleapis.com/openimages/web/index.html">OpenImages V4</a> pictures.</em></p>
+<h2 id="options-available-for-deploying-this-model">Options available for deploying this model</h2>
+<p>This model can be deployed using the following mechanisms:</p>
+<ul>
+<li><p>Deploy from Dockerhub:</p>
+<pre><code>docker <span class="hljs-built_in">run</span> -it -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> codait/<span class="hljs-built_in">max</span>-<span class="hljs-built_in">image</span>-resolution-enhancer
+</code></pre></li>
+</ul>
+<h2 id="example-usage">Example Usage</h2>
+<p>You can test or use this model <a href="#test-the-model-using-curl">using cURL</a></p>
+<h3 id="test-the-model-using-curl">Test the model using cURL</h3>
+<p>Use the <code>model/predict</code> endpoint to load a test image (you can use one of the test images from the <code>assets/test_examples/low_resolution</code> folder) in order to get a high resolution output image returned.</p>
+<p>Once deployed, you can test the model from the command line. For example:</p>
+<pre><code><span class="hljs-attribute">curl</span> -F <span class="hljs-string">"image=<span class="hljs-variable">@samples</span>/test_examples/low_resolution/food.png"</span> -XPOST http://localhost:5000/model/predict &gt; food_high_res.png
+</code></pre><p>The above command will send the low resolution <code>food.png</code> file to the model, and save the high resolution output image to the <code>food_high_res.png</code> file in the root directory.</p>
+<p>The ideal input image is a PNG file with a resolution between 100x100 and 500x500, preferably without any post-capture processing and flashy colors. The model is able to generate details from a pixelated image (low DPI), but is not able to correct a &#39;blurred&#39; image.</p>
+</body></html>

@@ -1,0 +1,65 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h2 id="overview">Overview</h2>
+<p>This model is able to detect whether a text fragment leans towards a positive or a negative sentiment. The underlying neural network is based on the <a href="https://github.com/google-research/bert/blob/master/README.md">pre-trained BERT-Base, English Uncased</a> model.</p>
+<p>Optimal input examples for this model are short strings (preferably a single sentence) with correct grammar, although not a requirement.</p>
+<h2 id="benchmark">Benchmark</h2>
+<p>In the table below, the prediction accuracy of the model on the test sets of three different datasets is listed.</p>
+<p>The first row showcases the generalization power of our model after finetuning on the IBM Claims Dataset.
+ The Sentiment140 (Tweets) and IMDB Reviews datasets are only used for evaluating the transfer-learning capabilities of this model. The implementation in this repository was <strong>not</strong> trained or finetuned on the Sentiment140 or IMDB reviews datasets.</p>
+<p>The second row describes the performance of the BERT-Base (English - Uncased) model when finetuned on the specific task. This was done simply for reference, and the weights are therefore not made available.</p>
+<p>The generalization results (first row) are very good when the input data is similar to the data used for finetuning (e.g. Sentiment140 (tweets) when finetuned on the IBM Claims Dataset). However, when a different style of text is given as input, and with a longer median length (e.g. multi-sentence IMDB reviews), the results are not as good.</p>
+<table>
+<thead>
+<tr>
+<th>Model Type</th>
+<th>IBM Claims</th>
+<th>Sentiment140</th>
+<th>IMDB Reviews</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>This Model <br> (finetuned)</td>
+<td>94%</td>
+<td>83.84%</td>
+<td>81%</td>
+</tr>
+<tr>
+<td>Models finetuned on the specific dataset</td>
+<td>94%</td>
+<td>84%</td>
+<td>90%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="options-available-for-deploying-this-model">Options available for deploying this model</h2>
+<p>This model can be deployed using the following mechanisms:</p>
+<ul>
+<li><p>Deploy from Dockerhub:</p>
+<pre><code>docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> codait/max-<span class="hljs-built_in">text</span>-sentiment-classifier
+</code></pre></li>
+</ul>
+<h2 id="example-usage">Example Usage</h2>
+<p>You can test or use this model</p>
+<ul>
+<li><a href="#test-the-model-using-curl">using cURL</a></li>
+</ul>
+<h3 id="test-the-model-using-curl">Test the model using cURL</h3>
+<p>Once deployed, you can test the model from the command line. For example:</p>
+<pre><code>curl -d <span class="hljs-string">"{ \"</span>text\<span class="hljs-string">": [ \"</span>The Model Asset Exchange <span class="hljs-keyword">is</span> a crucial element <span class="hljs-keyword">of</span> a developer<span class="hljs-symbol">'s</span> toolkit.\<span class="hljs-string">" ]}"</span> -X POST <span class="hljs-string">"http://localhost:5000/model/predict"</span> -H <span class="hljs-string">"Content-Type: application/json"</span>
+</code></pre><p>You should see a JSON response like that below:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ok"</span>,
+  <span class="hljs-attr">"predictions"</span>: [
+    [
+      {
+        <span class="hljs-attr">"positive"</span>: <span class="hljs-number">0.9977352619171143</span>,
+        <span class="hljs-attr">"negative"</span>: <span class="hljs-number">0.0022646968718618155</span>
+      }
+    ]
+  ]
+}
+</code></pre>
+</body></html>

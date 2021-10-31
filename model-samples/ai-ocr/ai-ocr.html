@@ -1,0 +1,56 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h2 id="overview">Overview</h2>
+<p>This repository contains code to instantiate and deploy an optical character recognition model. This model takes an
+image of text as an input and returns the predicted text. This model was trained on 20 samples of 94 characters from 8
+different fonts and 4 attributes (regular, bold, italic, bold + italic) for a total of 60,160 training samples. Please
+see the paper <a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/33418.pdf">An Overview of the Tesseract OCR Engine</a>
+for more detailed information about how this model was trained.</p>
+<h2 id="model-metadata">Model Metadata</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Application</th>
+<th>Industry</th>
+<th>Framework</th>
+<th>Training Data</th>
+<th>Input Data Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Image &amp; Video</td>
+<td>Optical Character Recognition</td>
+<td>General</td>
+<td>n/a</td>
+<td>Tesseract Data Files</td>
+<td>Image (PNG/JPG)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="options-available-for-deploying-this-model">Options available for deploying this model</h2>
+<ul>
+<li><p>Deploy from Dockerhub:</p>
+<pre><code>docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> codait/max-ocr
+</code></pre></li>
+</ul>
+<h3 id="test-the-model-using-curl">Test the model using cURL</h3>
+<p>Once deployed, you can test the model from the command line. For example if running locally:</p>
+<pre><code class="lang-bash">$ curl -F <span class="hljs-string">"image=image-ocr.jpg"</span> -XPOST http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">5000</span><span class="hljs-regexp">/model/</span>predict
+</code></pre>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ok"</span>,
+  <span class="hljs-attr">"text"</span>: [
+    [
+      <span class="hljs-string">"Text 1"</span>
+    ],
+    [
+      <span class="hljs-string">"This is testing of OCR capability"</span>,
+      <span class="hljs-string">"Please try out"</span>
+    ]
+  ]
+}
+</code></pre>
+</body></html>

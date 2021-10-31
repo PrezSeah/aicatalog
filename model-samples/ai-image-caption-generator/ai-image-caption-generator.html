@@ -1,0 +1,66 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h2 id="overview">Overview</h2>
+<p>This model generates captions from a fixed vocabulary that describe the contents of images in the <a href="http://cocodataset.org/#home">COCO Dataset</a>. The model consists of an <em>encoder</em> model - a deep convolutional net using the Inception-v3 architecture trained on <a href="http://www.image-net.org/challenges/LSVRC/2012/">ImageNet-2012 data</a> - and a <em>decoder</em> model - an LSTM network that is trained conditioned on the encoding from the image <em>encoder</em> model. The input to the model is an image, and the output is a sentence describing the image content.</p>
+<p>The model is based on the <a href="https://github.com/tensorflow/models/tree/archive/research/im2txt">Show and Tell Image Caption Generator Model</a>.</p>
+<h2 id="model-metadata">Model Metadata</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Application</th>
+<th>Industry</th>
+<th>Framework</th>
+<th>Training Data</th>
+<th>Input Data Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vision</td>
+<td>Image Caption Generator</td>
+<td>General</td>
+<td>TensorFlow</td>
+<td><a href="http://cocodataset.org/#home">COCO</a></td>
+<td>Images</td>
+</tr>
+</tbody>
+</table>
+<h2 id="options-available-for-deploying-this-model">Options available for deploying this model</h2>
+<p>This model can be deployed using the following mechanisms:</p>
+<ul>
+<li><p>Deploy from Dockerhub:</p>
+<pre><code>docker <span class="hljs-built_in">run</span> -it -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> codait/<span class="hljs-built_in">max</span>-<span class="hljs-built_in">image</span>-caption-generator
+</code></pre></li>
+</ul>
+<h2 id="example-usage">Example Usage</h2>
+<p>You can test or use this model</p>
+<ul>
+<li><a href="#test-the-model-using-curl">using cURL</a></li>
+</ul>
+<h3 id="test-the-model-using-curl">Test the model using cURL</h3>
+<p>Once deployed, you can test the model from the command line. For example if running locally:</p>
+<pre><code>curl -F <span class="hljs-string">"image=@assets/surfing.jpg"</span> -X POST http:<span class="hljs-regexp">//</span><span class="hljs-number">127.0</span>.<span class="hljs-number">0.1</span>:<span class="hljs-number">5000</span><span class="hljs-regexp">/model/</span>predict
+</code></pre><pre><code class="lang-json">{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ok"</span>,
+  <span class="hljs-attr">"predictions"</span>: [
+    {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-string">"0"</span>,
+      <span class="hljs-attr">"caption"</span>: <span class="hljs-string">"a man riding a wave on top of a surfboard ."</span>,
+      <span class="hljs-attr">"probability"</span>: <span class="hljs-number">0.038827644239537</span>
+    },
+    {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-string">"1"</span>,
+      <span class="hljs-attr">"caption"</span>: <span class="hljs-string">"a person riding a surf board on a wave"</span>,
+      <span class="hljs-attr">"probability"</span>: <span class="hljs-number">0.017933410519265</span>
+    },
+    {
+      <span class="hljs-attr">"index"</span>: <span class="hljs-string">"2"</span>,
+      <span class="hljs-attr">"caption"</span>: <span class="hljs-string">"a man riding a wave on a surfboard in the ocean ."</span>,
+      <span class="hljs-attr">"probability"</span>: <span class="hljs-number">0.0056628732021868</span>
+    }
+  ]
+}
+</code></pre>
+</body></html>

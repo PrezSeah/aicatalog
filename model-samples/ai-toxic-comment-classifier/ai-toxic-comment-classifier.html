@@ -1,0 +1,80 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h2 id="overview">Overview</h2>
+<p>This model is able to detect 6 types of toxicity in a text fragment. The six detectable types are toxic, severe toxic, obscene, threat, insult, and identity hate. The underlying neural network is based on the <a href="https://github.com/google-research/bert/blob/master/README.md">pre-trained BERT-Base, English Uncased model</a> and was finetuned on the <a href="https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data">Toxic Comment Classification Dataset</a> using the <a href="https://github.com/huggingface/pytorch-pretrained-BERT">Huggingface BERT Pytorch repository</a>.</p>
+<p>A brief definition of the six different toxicity types can be found below.</p>
+<pre><code><span class="hljs-attribute">Toxic</span>: very bad, unpleasant, or harmful
+
+<span class="livecodeserver">Severe toxic: extremely bad <span class="hljs-keyword">and</span> offensive
+
+Obscene: (<span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> portrayal <span class="hljs-keyword">or</span> description <span class="hljs-keyword">of</span> sexual matters) offensive <span class="hljs-keyword">or</span> disgusting <span class="hljs-keyword">by</span> accepted standards <span class="hljs-keyword">of</span> morality <span class="hljs-keyword">and</span> decency
+
+Threat: <span class="hljs-keyword">a</span> statement <span class="hljs-keyword">of</span> <span class="hljs-keyword">an</span> intention <span class="hljs-built_in">to</span> inflict pain, injury, damage, <span class="hljs-keyword">or</span> other hostile action <span class="hljs-keyword">on</span> <span class="hljs-title">someone</span> <span class="hljs-title">in</span> <span class="hljs-title">retribution</span> <span class="hljs-title">for</span> <span class="hljs-title">something</span> <span class="hljs-title">done</span> <span class="hljs-title">or</span> <span class="hljs-title">not</span> <span class="hljs-title">done</span>
+
+Insult: speak <span class="hljs-built_in">to</span> <span class="hljs-keyword">or</span> treat <span class="hljs-keyword">with</span> disrespect <span class="hljs-keyword">or</span> scornful abuse
+
+Identity hate: hatred, hostility, <span class="hljs-keyword">or</span> violence towards members <span class="hljs-keyword">of</span> <span class="hljs-keyword">a</span> race, ethnicity, nation, religion, gender, gender identity, sexual orientation <span class="hljs-keyword">or</span> <span class="hljs-keyword">any</span> other designated sector <span class="hljs-keyword">of</span> society</span>
+</code></pre><h2 id="model-metadata">Model Metadata</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Application</th>
+<th>Industry</th>
+<th>Framework</th>
+<th>Training Data</th>
+<th>Input Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Natural Language Processing (NLP)</td>
+<td>Text Classification</td>
+<td>General</td>
+<td>PyTorch</td>
+<td><a href="https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge/data">Toxic Comment Classification Dataset</a></td>
+<td>Text</td>
+</tr>
+</tbody>
+</table>
+<h2 id="benchmark">Benchmark</h2>
+<p>This model achieves a column-wise ROC AUC score of 0.98355 (private score) in the <a href="https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge">Kaggle Toxic Comment Classification Competition</a>. This implementation is trained with a maximum sequence length of 256 instead of 512 to have higher inference speed. For most applications outside of this Kaggle competition, a sequence length of 256 is more than sufficient.</p>
+<h2 id="options-available-for-deploying-this-model">Options available for deploying this model</h2>
+<p>This model can be deployed using the following mechanisms:</p>
+<ul>
+<li>Deploy from Dockerhub:<pre><code>docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> codait/max-toxic-comment-classifier
+</code></pre></li>
+</ul>
+<h2 id="example-usage">Example Usage</h2>
+<p>You can test or use this model</p>
+<ul>
+<li><a href="#test-the-model-using-curl">using cURL</a></li>
+</ul>
+<h3 id="test-the-model-using-curl">Test the model using cURL</h3>
+<p>Once deployed, you can test the model from the command line. For example:</p>
+<pre><code>curl -d <span class="hljs-string">"{ \"</span><span class="hljs-keyword">text</span>\<span class="hljs-string">": [ \"</span>I would <span class="hljs-keyword">like</span> <span class="hljs-keyword">to</span> punch you.\<span class="hljs-string">", \"</span><span class="hljs-keyword">In</span> hindsight, I <span class="hljs-keyword">do</span> apologize <span class="hljs-keyword">for</span> my previous statement.\<span class="hljs-string">" ]}"</span> -X POST <span class="hljs-string">"http://localhost:5000/model/predict"</span> -H <span class="hljs-string">"Content-Type: application/json"</span>
+</code></pre><p>You should see a JSON response like that below:</p>
+<pre><code class="lang-json">{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ok"</span>,
+  <span class="hljs-attr">"predictions"</span>: [
+    {
+      <span class="hljs-attr">"toxic"</span>: <span class="hljs-number">0.9796434044837952</span>,
+      <span class="hljs-attr">"severe_toxic"</span>: <span class="hljs-number">0.07256636023521423</span>,
+      <span class="hljs-attr">"obscene"</span>: <span class="hljs-number">0.058431386947631836</span>,
+      <span class="hljs-attr">"threat"</span>: <span class="hljs-number">0.8635178804397583</span>,
+      <span class="hljs-attr">"insult"</span>: <span class="hljs-number">0.11121545732021332</span>,
+      <span class="hljs-attr">"identity_hate"</span>: <span class="hljs-number">0.013826466165482998</span>
+    },
+    {
+      <span class="hljs-attr">"toxic"</span>: <span class="hljs-number">0.00029103411361575127</span>,
+      <span class="hljs-attr">"severe_toxic"</span>: <span class="hljs-number">0.00012417171092238277</span>,
+      <span class="hljs-attr">"obscene"</span>: <span class="hljs-number">0.0001522742968518287</span>,
+      <span class="hljs-attr">"threat"</span>: <span class="hljs-number">0.00008440738747594878</span>,
+      <span class="hljs-attr">"insult"</span>: <span class="hljs-number">0.00016013195272535086</span>,
+      <span class="hljs-attr">"identity_hate"</span>: <span class="hljs-number">0.00012860879360232502</span>
+    }
+  ]
+}
+</code></pre>
+</body></html>

@@ -1,0 +1,176 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h2 id="overview">Overview</h2>
+<p>This model takes hourly weather data (as a Numpy array of various weather features, in text file format) as input and returns hourly weather predictions for a specific target variable or variables (such as temperature or windspeed).</p>
+<p>Three pre-trained models are provided, all trained by the <a href="https://www.ibm.com/opensource/centers/codait/">CODAIT team</a> on <a href="https://www.ncdc.noaa.gov">National Oceanic and Atmospheric Administration</a> local climatological data originally collected by JFK airport. All three models use an LSTM recurrent neural network architecture.</p>
+<p>A description of the weather variables used to train the models is set out below.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HOURLYVISIBILITY</td>
+<td>Distance from which an object can be seen.</td>
+</tr>
+<tr>
+<td>HOURLYDRYBULBTEMPF</td>
+<td>Dry bulb temperature (degrees Fahrenheit). Most commonly reported standard temperature.</td>
+</tr>
+<tr>
+<td>HOURLYWETBULBTEMPF</td>
+<td>Wet bulb temperature (degrees Fahrenheit).</td>
+</tr>
+<tr>
+<td>HOURLYDewPointTempF</td>
+<td>Dew point temperature (degrees Fahrenheit).</td>
+</tr>
+<tr>
+<td>HOURLYRelativeHumidity</td>
+<td>Relative humidity (percent).</td>
+</tr>
+<tr>
+<td>HOURLYWindSpeed</td>
+<td>Wind speed (miles per hour).</td>
+</tr>
+<tr>
+<td>HOURLYStationPressure</td>
+<td>Atmospheric pressure (inches of Mercury; or &#39;in Hg&#39;).</td>
+</tr>
+<tr>
+<td>HOURLYSeaLevelPressure</td>
+<td>Sea level pressure (in Hg).</td>
+</tr>
+<tr>
+<td>HOURLYPrecip</td>
+<td>Total precipitation in the past hour (in inches).</td>
+</tr>
+<tr>
+<td>HOURLYAltimeterSetting</td>
+<td>Atmospheric pressure reduced to sea level using temperature profile of the “standard” atmosphere (in Hg).</td>
+</tr>
+<tr>
+<td>HOURLYWindDirectionSin</td>
+<td>Sine component of wind direction transformation (since wind direction is cyclical).</td>
+</tr>
+<tr>
+<td>HOURLYWindDirectionCos</td>
+<td>Cosine component of wind direction transformation (since wind direction is cyclical).</td>
+</tr>
+<tr>
+<td>HOURLYPressureTendencyIncr</td>
+<td>Dummy variable indicating if pressure was increasing in the past hour.</td>
+</tr>
+<tr>
+<td>HOURLYPressureTendencyDecr</td>
+<td>Dummy variable indicating if pressure was decreasing in the past hour.</td>
+</tr>
+<tr>
+<td>HOURLYPressureTendencyCons</td>
+<td>Dummy variable indicating if pressure has stayed relatively constant in the past hour.</td>
+</tr>
+</tbody>
+</table>
+<p>For further details on the weather variables see the <a href="https://www1.ncdc.noaa.gov/pub/data/cdo/documentation/LCD_documentation.pdf">US Local Climatological Data Documentation</a></p>
+<p>Each model returns a different format for its predictions:</p>
+<ul>
+<li><em>Univariate Model</em>: returns a prediction of dry bulb temperature (<code>HOURLYDRYBULBTEMPF</code>), for the next hourly time step, for each input data point</li>
+<li><em>Multivariate Model</em>: returns predictions for all 15 weather variables, for the next hourly time step, for each input data point</li>
+<li><em>Multistep Model</em>: returns predictions of dry bulb temperature (<code>HOURLYDRYBULBTEMPF</code>), for the next 48 hourly time steps, for each input data point</li>
+</ul>
+<h2 id="model-metadata">Model Metadata</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Application</th>
+<th>Industry</th>
+<th>Framework</th>
+<th>Training Data</th>
+<th>Input Data Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Weather</td>
+<td>Time Series Prediction</td>
+<td>General</td>
+<td>TensorFlow / Keras</td>
+<td><a href="https://www.ncdc.noaa.gov/cdo-web/datasets/LCD/stations/WBAN:94789/detail">JFK Airport Weather Data, NOAA</a></td>
+<td>CSV</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Data from <a href="https://www.ncdc.noaa.gov/cdo-web/datatools/lcd">US Local Climatological Data</a>, National Climatic Data Center, National Oceanic &amp; Atmospheric Administration</li>
+</ul>
+<h2 id="options-available-for-deploying-this-model">Options available for deploying this model</h2>
+<p>This model can be deployed using the following mechanisms:</p>
+<ul>
+<li>Deploy from Dockerhub:<pre><code>docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> codait/max-weather-forecaster
+</code></pre></li>
+</ul>
+<h2 id="example-usage">Example Usage</h2>
+<p>Once deployed, you can test the model from the command line. For example to test the multi-step model when running locally:</p>
+<pre><code>curl -F <span class="hljs-string">"file=@assets/lstm_weather_test_data/multistep_model_test_data.txt"</span> -XPOST http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">5000</span><span class="hljs-regexp">/model/</span>predict?model=multistep
+</code></pre><p>You should see a JSON response like that below for the <code>multistep</code> test data, where <code>predictions</code> contains the predicted dry bulb temperature (in F) for each of the next 48 hours, for each input data point.</p>
+<pre><code>{
+  <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ok"</span>,
+  <span class="hljs-attr">"predictions"</span>: [
+    [
+      <span class="hljs-number">77.51201432943344</span>,
+      <span class="hljs-number">76.51381462812424</span>,
+      <span class="hljs-number">75.0168582201004</span>,
+      <span class="hljs-number">73.84445126354694</span>,
+      <span class="hljs-number">72.79087746143341</span>,
+      <span class="hljs-number">71.71804094314575</span>,
+      <span class="hljs-number">70.97693882882595</span>,
+      <span class="hljs-number">70.44060184061527</span>,
+      <span class="hljs-number">69.89843893051147</span>,
+      <span class="hljs-number">69.35454525053501</span>,
+      <span class="hljs-number">69.04163710772991</span>,
+      <span class="hljs-number">68.70432360470295</span>,
+      <span class="hljs-number">68.37075608968735</span>,
+      <span class="hljs-number">68.20421539247036</span>,
+      <span class="hljs-number">68.01852786540985</span>,
+      <span class="hljs-number">67.6653740555048</span>,
+      <span class="hljs-number">67.27566187083721</span>,
+      <span class="hljs-number">67.0398361980915</span>,
+      <span class="hljs-number">66.69407051801682</span>,
+      <span class="hljs-number">66.9289058893919</span>,
+      <span class="hljs-number">67.19844545423985</span>,
+      <span class="hljs-number">67.65162572264671</span>,
+      <span class="hljs-number">68.30480472743511</span>,
+      <span class="hljs-number">69.37090930342674</span>,
+      <span class="hljs-number">70.37226051092148</span>,
+      <span class="hljs-number">71.57235226035118</span>,
+      <span class="hljs-number">72.68855434656143</span>,
+      <span class="hljs-number">73.91224025189877</span>,
+      <span class="hljs-number">74.65138283371925</span>,
+      <span class="hljs-number">75.09161844849586</span>,
+      <span class="hljs-number">75.30447003245354</span>,
+      <span class="hljs-number">75.04770956933498</span>,
+      <span class="hljs-number">74.93723678588867</span>,
+      <span class="hljs-number">74.27759975194931</span>,
+      <span class="hljs-number">73.82458955049515</span>,
+      <span class="hljs-number">73.32358133792877</span>,
+      <span class="hljs-number">72.66812674701214</span>,
+      <span class="hljs-number">71.75925283133984</span>,
+      <span class="hljs-number">71.28871068358421</span>,
+      <span class="hljs-number">70.66486597061157</span>,
+      <span class="hljs-number">70.06835387647152</span>,
+      <span class="hljs-number">69.74887031316757</span>,
+      <span class="hljs-number">69.49707941710949</span>,
+      <span class="hljs-number">69.26406812667847</span>,
+      <span class="hljs-number">68.87126012146473</span>,
+      <span class="hljs-number">68.60496838390827</span>,
+      <span class="hljs-number">68.39429907500744</span>,
+      <span class="hljs-number">68.03596951067448</span>
+    ],
+    ...
+}
+</code></pre></body></html>

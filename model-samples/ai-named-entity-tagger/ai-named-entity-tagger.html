@@ -1,0 +1,76 @@
+<html><head><style>body {
+   color: black;
+}
+</style></head><body><h2 id="overview">Overview</h2>
+<p>This model annotates each word or term in a piece of text with a tag representing the entity type, taken from a list of 17 entity tags from the <a href="http://gmb.let.rug.nl/data.php">The Groningen Meaning Bank (GMB) dataset</a>. These tags cover 8 types of named entities: persons, locations, organizations, geo-political entities, artifacts, events, natural objects, time, as well as a tag for &#39;no entity&#39; (see the <a href="http://gmb.let.rug.nl/manual.php">GMB dataset manual page</a> for the full entity definitions). The entity types furthermore may be tagged with either a &quot;B-&quot; tag or &quot;I-&quot; tag. A &quot;B-&quot; tag  indicates the first term of a new entity (or only term of a single-term entity), while subsequent terms in an entity will have an &quot;I-&quot; tag. For example, &quot;New York&quot; would be tagged as <code>[&quot;B-GEO&quot;, &quot;I-GEO&quot;]</code> while  &quot;London&quot; would be tagged as <code>&quot;B-GEO&quot;</code>.</p>
+<p>The model consists of a recurrent neural network architecture with a bi-directional LSTM layer applied to character-level embedding vectors, which are combined with pre-trained <a href="https://nlp.stanford.edu/projects/glove/">GloVe 6B</a> word vector embeddings; finally a second bi-directional LSTM layer is applied to this combined vector representation. The input to the model is a string and the output is a list of terms in the input text (after applying simple tokenization), together with a list of predicted entity tags for each term.</p>
+<p>The model is based on Guillaume Genthial&#39;s <a href="https://github.com/guillaumegenthial/sequence_tagging">Named Entity Recognition with TensorFlow model</a>, adapted to use the Keras framework. </p>
+<h2 id="model-metadata">Model Metadata</h2>
+<table>
+<thead>
+<tr>
+<th>Domain</th>
+<th>Application</th>
+<th>Industry</th>
+<th>Framework</th>
+<th>Training Data</th>
+<th>Input Data Format</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Natural Language Processing</td>
+<td>Named Entity Recognition</td>
+<td>General</td>
+<td>Keras</td>
+<td><a href="http://gmb.let.rug.nl/data.php">Groningen Meaning Bank (GMB) Dataset</a></td>
+<td>Text</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note</em> the underlying dataset is primarily based on news articles and so the model should perform relatively better on input related to general news, business, geo-political and sporting events. The dataset covers a period up until 2014, which governs the entities the model will be aware of.</p>
+<h2 id="options-available-for-deploying-this-model">Options available for deploying this model</h2>
+<p>This model can be deployed using the following mechanisms:</p>
+<ul>
+<li><p>Deploy from Dockerhub:</p>
+<pre><code>docker <span class="hljs-built_in">run</span> -<span class="hljs-keyword">it</span> -p <span class="hljs-number">5000</span>:<span class="hljs-number">5000</span> codait/max-named-entity-tagger
+</code></pre></li>
+</ul>
+<h2 id="example-usage">Example Usage</h2>
+<p>You can test or use this model</p>
+<ul>
+<li><a href="#test-the-model-using-curl">using cURL</a></li>
+</ul>
+<h3 id="test-the-model-using-curl">Test the model using cURL</h3>
+<p>Once deployed, you can test the model from the command line. For example:</p>
+<pre><code>curl -X POST -H <span class="hljs-string">'Content-Type: application/json'</span> -d <span class="hljs-string">'{"</span>text<span class="hljs-string">":"</span>John lives in Brussels <span class="hljs-built_in">and</span> works <span class="hljs-keyword">for</span> the EU<span class="hljs-string">"}'</span> <span class="hljs-string">'http://localhost:5000/model/predict'</span>
+</code></pre><p>You should see a JSON response like that below:</p>
+<pre><code class="lang-json">{
+    <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ok"</span>,
+    <span class="hljs-attr">"prediction"</span>: {
+        <span class="hljs-attr">"entities"</span>: [
+            <span class="hljs-string">"B-PER"</span>,
+            <span class="hljs-string">"O"</span>,
+            <span class="hljs-string">"O"</span>,
+            <span class="hljs-string">"B-GEO"</span>,
+            <span class="hljs-string">"O"</span>,
+            <span class="hljs-string">"O"</span>,
+            <span class="hljs-string">"O"</span>,
+            <span class="hljs-string">"O"</span>,
+            <span class="hljs-string">"B-ORG"</span>
+        ],
+        <span class="hljs-attr">"input_terms"</span>: [
+            <span class="hljs-string">"John"</span>,
+            <span class="hljs-string">"lives"</span>,
+            <span class="hljs-string">"in"</span>,
+            <span class="hljs-string">"Brussels"</span>,
+            <span class="hljs-string">"and"</span>,
+            <span class="hljs-string">"works"</span>,
+            <span class="hljs-string">"for"</span>,
+            <span class="hljs-string">"the"</span>,
+            <span class="hljs-string">"EU"</span>
+        ]
+    }
+}
+</code></pre>
+</body></html>
