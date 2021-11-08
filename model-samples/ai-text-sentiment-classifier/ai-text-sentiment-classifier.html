@@ -14,7 +14,6 @@
 <thead>
 <tr>
 <th>Model Type</th>
-<th>IBM Claims</th>
 <th>Sentiment140</th>
 <th>IMDB Reviews</th>
 </tr>
@@ -48,7 +47,7 @@
 </ul>
 <h3 id="test-the-model-using-curl">Test the model using cURL</h3>
 <p>Once deployed, you can test the model from the command line. For example:</p>
-<pre><code>curl -d <span class="hljs-string">"{ \"</span>text\<span class="hljs-string">": [ \"</span>The Model Asset Exchange <span class="hljs-keyword">is</span> a crucial element <span class="hljs-keyword">of</span> a developer<span class="hljs-symbol">'s</span> toolkit.\<span class="hljs-string">" ]}"</span> -X POST <span class="hljs-string">"http://localhost:5000/model/predict"</span> -H <span class="hljs-string">"Content-Type: application/json"</span>
+<pre><code>curl -d <span class="hljs-string">"{ \"</span>text\<span class="hljs-string">": [ \"</span>The Model Catalogue <span class="hljs-keyword">is</span> a crucial element <span class="hljs-keyword">of</span> a developer<span class="hljs-symbol">'s</span> toolkit.\<span class="hljs-string">" ]}"</span> -X POST <span class="hljs-string">"http://localhost:5000/model/predict"</span> -H <span class="hljs-string">"Content-Type: application/json"</span>
 </code></pre><p>You should see a JSON response like that below:</p>
 <pre><code class="lang-json">{
   <span class="hljs-attr">"status"</span>: <span class="hljs-string">"ok"</span>,
