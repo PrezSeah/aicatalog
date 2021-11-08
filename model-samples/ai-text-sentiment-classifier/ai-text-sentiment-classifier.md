@@ -42,7 +42,7 @@ You can test or use this model
 Once deployed, you can test the model from the command line. For example:
 
 ```
-curl -d "{ \"text\": [ \"The Model Asset Exchange is a crucial element of a developer's toolkit.\" ]}" -X POST "http://localhost:5000/model/predict" -H "Content-Type: application/json"
+curl -d "{ \"text\": [ \"The Model Catalogue is a crucial element of a developer's toolkit.\" ]}" -X POST "http://localhost:5000/model/predict" -H "Content-Type: application/json"
 ```
 
 You should see a JSON response like that below:
