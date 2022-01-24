@@ -1,7 +1,7 @@
 
 **AI Model : AI Scene Classifier - Testing**
 
-**Model Testing  Web command**
+**Model Testing Web command**
 
 Deployment from dockerhub:
 
