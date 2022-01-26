@@ -25,7 +25,7 @@ res.content
 
 **Sample Input**
 
-![](ai-image-detector-testing_files/image005.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-detector/ai-image-detector-testing_files/image005.jpg)
 
 **Sample Response**
 

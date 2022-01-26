@@ -25,7 +25,7 @@ res.content
 
 **Sample Input**
 
-![](ai-ocr-testing_files/image004.png)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-ocr/ai-ocr-testing_files/image004.png)
 
 **Sample Response**
 

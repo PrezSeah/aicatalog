@@ -35,7 +35,7 @@ curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json"
 
 **Sample Input**
 
-![](ai-image-detector-description_files/image006.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-detector/ai-image-detector-description_files/image006.jpg)
 
 **Sample Response**
 

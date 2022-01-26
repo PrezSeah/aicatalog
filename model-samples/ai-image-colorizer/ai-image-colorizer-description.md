@@ -34,8 +34,8 @@ curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json"
 
 **Sample Input**
 
-![](ai-image-colorizer-description_files/image006.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-colorizer/ai-image-colorizer-description_files/image006.jpg)
 
 **Sample Response**
 
-![](ai-image-colorizer-description_files/image007.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-colorizer/ai-image-colorizer-description_files/image007.jpg)

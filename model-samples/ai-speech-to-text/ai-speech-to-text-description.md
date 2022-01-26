@@ -21,7 +21,7 @@ Training Data : Mozilla Common Voice
 
 Input Data Format : Audio (16 bit, 16 kHz, mono WAV file)
 
-**Dockehub** **Link**
+**Dockerhub** **Link**
 
 https://hub.docker.com/r/codait/max-speech-to-text-converter
 

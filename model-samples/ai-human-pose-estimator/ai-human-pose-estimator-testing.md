@@ -26,7 +26,7 @@ res.content
 
 **Sample Input**
 
-![](ai-human-pose-estimator-testing_files/image003.png)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-human-pose-estimator/ai-human-pose-estimator-testing_files/image003.png)
 
 **Sample Response**
 

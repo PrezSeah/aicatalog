@@ -37,7 +37,7 @@ curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json"
 
 **Sample Input**
 
-![](ai-human-pose-estimator-description_files/image001.png)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-human-pose-estimator/ai-human-pose-estimator-description_files/image001.png)
 
 **Sample Response**
 

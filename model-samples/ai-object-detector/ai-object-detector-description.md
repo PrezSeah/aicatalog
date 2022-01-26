@@ -35,7 +35,7 @@ curl -X POST "http://localhost:5000/model/predict?threshold\=0.5" -H "accept: ap
 
 **Sample Input**
 
-![](ai-object-detector-description_files/image002.png)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-object-detector/ai-object-detector-description_files/image002.png)
 
 **Sample Output**
 

@@ -39,7 +39,7 @@ curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json"
 
 **Sample Input**
 
-![](aI-image-segmentation-map-description_files/image002.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-segmentation-map/ai-image-segmentation-map-description_files/image002.jpg)
 
 **Sample Output**
 

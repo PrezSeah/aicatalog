@@ -25,7 +25,7 @@ res.content
 
 **Sample Input**
 
-![](ai-scene-classifier-testing_files/image002.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-scene-classifier/ai-scene-classifier-testing_files/image002.jpg)
 
 **Sample Response**
 

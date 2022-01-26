@@ -25,8 +25,8 @@ res.content
 
 **Sample Input**
 
-![](ai-image-colorizer-testing_files/image004.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-colorizer/ai-image-colorizer-testing_files/image004.jpg)
 
 **Sample Response**
 
-![](ai-image-colorizer-testing_files/image006.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-colorizer/ai-image-colorizer-testing_files/image006.jpg)

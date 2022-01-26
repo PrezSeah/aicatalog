@@ -24,8 +24,8 @@ res.content
 
 **Sample Input**
 
-![](ai-image-resolution-enhancer-testing_files/image002.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-resolution-enhancer/ai-image-resolution-enhancer-testing_files/image002.jpg)
 
 **Sample Response**
 
-![](ai-image-resolution-enhancer-testing_files/image004.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-resolution-enhancer/ai-image-resolution-enhancer-testing_files/image004.jpg)

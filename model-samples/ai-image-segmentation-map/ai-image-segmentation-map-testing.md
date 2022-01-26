@@ -25,7 +25,7 @@ res.content
 
 **Sample Input**
 
-![](ai-image-segmentation-map-testing_files/image001.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-segmentation-map/ai-image-segmentation-map-testing_files/image001.jpg)
 
 **Sample Response**
 

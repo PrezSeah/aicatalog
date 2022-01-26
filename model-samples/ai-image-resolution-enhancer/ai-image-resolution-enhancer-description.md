@@ -23,7 +23,7 @@ Input Data Format : Image (RGB/HWC)
 
 **Benchmark**
 
-![](ai-image-resolution-enhancer-description_files/image004.png)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-resolution-enhancer/ai-image-resolution-enhancer-description_files/image004.png)
 
 The performance of this implementation was evaluated on three datasets: Set5, Set14, and BSD100. The PSNR (peak signal to noise ratio) and SSIM (structural similarity index) metrics were evaluated, although the paper discusses the MOS (mean opinion score) as the most favorable metric. In essence, the SRGAN implementation trades a better PSNR or SSIM score for a result more appealing to the human eye. This leads to a collection of output images with more crisp and realistic details.
 
@@ -45,8 +45,8 @@ curl -X POST "http://localhost:5001/model/predict" -H "accept: application/json"
 
 **Sample Input**
 
-![](ai-image-resolution-enhancer-description_files/image006.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-resolution-enhancer/ai-image-resolution-enhancer-description_files/image006.jpg)
 
 **Sample Output**
 
-![](ai-image-resolution-enhancer-description_files/image008.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-resolution-enhancer/ai-image-resolution-enhancer-description_files/image008.jpg)

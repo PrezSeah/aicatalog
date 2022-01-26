@@ -24,7 +24,7 @@ res.content
 
 **Sample Input**
 
-![](ai-image-caption-generator-testing_files/image002.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-image-caption-generator/ai-image-caption-generator-testing_files/image002.jpg)
 
 **Sample Response**
 

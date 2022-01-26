@@ -35,7 +35,7 @@ curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json"
 
 **Sample Input**
 
-![](ai-ocr-description_files/image001.png)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-ocr/ai-ocr-description_files/image001.png)
 
 **Sample Output**
 
