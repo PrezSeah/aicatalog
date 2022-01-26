@@ -31,10 +31,10 @@ https://localhost:5000/
 
 **Sample Input**
 
-![](ai-face-recognition-description_files/image004.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-face-recognition/ai-face-recognition-description_files/image004.jpg)
 
-![](ai-face-recognition-description_files/image006.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-face-recognition/ai-face-recognition-description_files/image006.jpg)
 
 **Sample Response**
 
-![](ai-face-recognition-description_files/image008.jpg)
+![](https://github.com/PrezSeah/pretrained-model-info/raw/main/model-samples/ai-face-recognition/ai-face-recognition-description_files/image008.jpg)
