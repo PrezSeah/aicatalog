@@ -35,7 +35,24 @@ docker run -it -p 5000:5000 codait/max-named-entity-tagger
 
 **Model Testing**
 
+**Model Testing cURL command**
+
 curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \\"text\\": \\"John lives in Brussels and works for the EU. Soon he will be coming to India for Market Research.\\"}"
+
+**Model Testing Python Code**
+
+· Ensure to have python / anaconda in your system
+
+· Run the following snippet Enter the desired customer text
+
+import requests
+
+res = requests.post('http://localhost:5000/model/predict',
+
+ json = {'text':'John lives in Brussels and works for the EU. Soon he will be coming to India for Market Research'})
+
+res.content  
+  
 
 **Sample Input**
 
