@@ -31,7 +31,26 @@ docker run -it -p 5000:5000 codait/max-image-detector
 
 **Model Testing**
 
-curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "lion.png;type\=image/png"
+**Model Testing cURL command**
+
+curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json" -H "Content-Type: multipart/form-data" -F "image=@lion.jpg;type\=image/jpeg" --output lion\_c.jpg
+
+**Model Testing Python Code**
+
+· Download the test image from the link :  
+https://github.com/PrezSeah/pretrained-model-info/tree/main/model-samples/ai-image-detector /sample\_input
+
+· Ensure to have python / anaconda in your system
+
+· Run the following snippet (keep the test image in working directory or provide the image location in the code)
+
+import requests
+
+res = requests.post('http://localhost:5000/model/predict', 
+
+ files = {'image' : ('lion.jpg', open('sample\_input/lion.jpg', 'rb'), 'image/png')})
+
+res.content  
 
 **Sample Input**
 
