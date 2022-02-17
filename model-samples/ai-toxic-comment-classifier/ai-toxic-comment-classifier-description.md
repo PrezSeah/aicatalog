@@ -47,7 +47,25 @@ docker run -it -p 5000:5000 codait/max-toxic-comment-classifier
 
 **Model Testing**
 
+**Model Testing cURL command**
+
 curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \\"text\\": \[ \\"Hitler was the most hated person in the history. He killed more than a million people.\\" \]}"
+
+**Model Testing Python Code**
+
+· Ensure to have python / anaconda in your system
+
+· Run the following snippet - Enter the desired customer text
+
+import requests
+
+res = requests.post('http://localhost:5001/model/predict',
+
+ json = {'text':\['Hitler was the most hated person in the history. He killed more than a million people.'\]})
+
+res.content  
+  
+
 
 **Sample Input**
 
