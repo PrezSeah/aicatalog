@@ -33,8 +33,24 @@ docker run -it -p 5000:5000 codait/max-question-answering
 
 **Model Testing**
 
+**Model Testing cURL command**
+
 curl -X POST "http://localhost:5000/model/predict" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \\"paragraphs\\": \[ { \\"context\\": \\"On 22 December, The Spiderman movie will be released worldwide. Its under the Marvel Banner\\", \\"questions\\": \[ \\"When is The Spiderman movie released?\\" \] }, { \\"context\\": \\"Jane lives in Paris and works for the UN\\", \\"questions\\": \[ \\"Where does Jane Live?\\", \\"What does Jane do?\\" \] } \]}"
 
+**Model Testing Python Code**
+
+· Ensure to have python / anaconda in your system
+
+· Run the following snippet - Enter the desired customer text
+
+import requests
+
+res = requests.post('http://localhost:5000/model/predict',
+
+ json = { "paragraphs": \[ { "context": "On 22 December, The Spiderman movie will be released worldwide. Its under the Marvel Banner", "questions": \[ "When is The Spiderman movie released?" \] }, { "context": "Jane lives in Paris and works for the UN", "questions": \[ "Where does Jane Live?", "What does Jane do?" \] } \]})
+
+res.content  
+  
 **Sample Input**
 
 Context : On 22 December, The Spiderman movie will be released worldwide. Its under the Marvel Banner  
